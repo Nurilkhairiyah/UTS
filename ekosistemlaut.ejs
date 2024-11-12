@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pemantauan Ekosistem Laut</title>
+    <link rel="stylesheet" href="/LIVE CODING/public/styleekosistemlaut.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Data Pemantauan Ekosistem Laut</h2>
+
+        <!-- Filter Form -->
+        <form action="/LIVE CODING/views/ekosistemlaut.ejs" method="GET">
+            <label for="id_peneliti">Peneliti:</label>
+            <select name="id_peneliti" id="id_peneliti">
+                <option value="">Pilih Peneliti</option>
+                    <option value="<%= peneliti.id %>">eneliti.nama</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Table Displaying Data -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Peneliti</th>
+                    <th>Nama Spesies Yang Diambil</th>
+                    <th>Jumlah Populasi</th>
+                    <th>Status Konservasi</th>
+                    <th>Lokasi Pemantauan</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>data.id</td>
+                        <td>data.nama</td>
+                        <td>data.nama_spesies_yang_di_ambil</td>
+                        <td>data.jumlah_populasi</td>
+                        <td>data.status_konservasi</td>
+                        <td>data.lokasi_pemantauan</td>
+                        <td>
+                            <!-- Edit Button -->
+                            <form action="/ekosistemlaut/<%= data.id %>?_method=PUT" method="POST" style="display:inline;">
+                                <input type="hidden" name="id_peneliti" value="
+                                <input type="text" name="nama_spesies_yang_di_ambil" value=>
+                                <input type="number" name="jumlah_populasi" value=>
+                                <input type="text" name="status_konservasi" value=>
+                                <input type="text" name="lokasi_pemantauan" value=>
+                                <button type="submit">Update</button>
+                            </form>
+                            <!-- Delete Button -->
+                            <form action="/ekosistemlaut/<%= data.id %>?_method=DELETE" method="POST" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+
+        <!-- Add New Record Form -->
+        <h3>Tambah Data Pemantauan</h3>
+        <form action="/ekosistemlaut" method="POST">
+            <label for="id_peneliti">Peneliti:</label>
+            <select name="id_peneliti" id="id_peneliti">
+                <% peneliti.forEach(function(peneliti) { %>
+                    <option value="<%= peneliti.id %>"></option>
+                <% }); %>
+            </select>
+            <label for="nama_spesies_yang_di_ambil">Nama Spesies Yang Diambil:</label>
+            <input type="text" name="nama_spesies_yang_di_ambil" required>
+            <label for="jumlah_populasi">Jumlah Populasi:</label>
+            <input type="number" name="jumlah_populasi" required>
+            <label for="status_konservasi">Status Konservasi:</label>
+            <input type="text" name="status_konservasi" required>
+            <label for="lokasi_pemantauan">Lokasi Pemantauan:</label>
+            <input type="text" name="lokasi_pemantauan" required>
+            <button type="submit">Tambah</button>
+        </form>
+    </div>
+</body>
+</html>

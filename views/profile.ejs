@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/LIVE CODING/public/styleprofile.css">
+  <title>Profile</title>
+  <script>
+    function confirmLogout(event) {
+      event.preventDefault(); // Mencegah tautan untuk melakukan aksi default
+      const confirmation = confirm("Are you sure you want to logout?");
+      if (confirmation) {
+        window.location.href = event.target.href; // Redirect jika pengguna mengkonfirmasi
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome di EcoMarine Solutions</h2>
+   
+    <h3>Edit Profile</h3>
+    <form action="/LIVE CODING/views/register.ejs method="POST">
+      <input type="hidden" name="id" value="<%= user.id %>">
+      
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value= >
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value= >
+
+      <label for="prodi">Prodi</label>
+      <select id="prodi" name="prodi">
+        <option value="" disabled>Select your prodi</option>
+        <option value="sistem informasi kelautan" <%= user.prodi === 'sistem informasi kelautan' ? 'selected' : '' %>>Sistem Informasi Kelautan</option>
+        <option value="logistik kelautan" <%= user.prodi === 'logistik kelautan' ? 'selected' : '' %>>Logistik Kelautan</option>
+        <option value="pendidikan kelautan perikanan" <%= user.prodi === 'pendidikan kelautan perikanan' ? 'selected' : '' %>>Pendidikan Kelautan Perikanan</option>
+        <option value="pendidikan guru sekolah dasar" <%= user.prodi === 'pendidikan guru sekolah dasar' ? 'selected' : '' %>>Pendidikan Guru Sekolah Dasar</option>
+        <option value="pendidikan guru paud" <%= user.prodi === 'pendidikan guru paud' ? 'selected' : '' %>>Pendidikan Guru PAUD</option>
+      </select>
+
+      <label for="asal">Asal</label>
+      <input type="text" id="asal" name="asal" value= >
+      
+      <button type="submit">Update</button>
+    </form>
+    
+    <a href="/LIVE CODING/views/login.ejs" onclick="confirmLogout(event)">Logout</a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
